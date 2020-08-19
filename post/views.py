@@ -31,4 +31,24 @@ def create(request):
     post_active = request.POST['post_active']
     post = Post(title=title, content=content, post_active=post_active, created_at=timezone.now())
     post.save()
-    return redirect('post:detail', post_id = post.id)
+    return redirect('post:detail', post_id=post.id)
+
+def edit(request, post_id):
+    post = Post.objects.get(id=post_id)
+    context = {
+        'post' : post
+    }
+    return render(request, 'edit.html', context)
+
+def update(request, post_id):
+    post = Post.objects.get(id=post_id)
+    post.title = request.POST['title']
+    post.content = request.POST['content']
+    post.post_active = True
+    post.save()
+    return redirect('post:detail', post_id=post.id)
+
+def delete(request, post_id):
+    post = Post.objects.get(id=post_id)
+    post.delete()
+    return redirect('post:lists')
