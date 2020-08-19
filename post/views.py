@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .models import Post
+from django.utils import timezone
 
 # Create your views here.
 
@@ -10,10 +12,23 @@ def new(request):
     return render(request, 'new.html')
 
 def lists(request):
+    post = Post.objects.all()
     context = {
-        'title1' : '내가 웹개발을 시작하면서',
-        'title2' : '개발에 대해 가지고 있던 생각들',
-        'title3' : '하나하나 만들어 가는 내 아이디어',
-        'title4' : '무언가를 만들어내기 위해서는 시간이 필요하다.',
+        'post' : post
     }
     return render(request, 'lists.html', context)
+
+def detail(request, post_id):
+    post = Post.objects.get(id=post_id)
+    context = {
+        'post' : post
+    }
+    return render(request, 'detail.html', context)
+
+def create(request):
+    title = request.POST['title']
+    content = request.POST['content']
+    post_active = request.POST['post_active']
+    post = Post(title=title, content=content, post_active=post_active, created_at=timezone.now())
+    post.save()
+    return redirect('post:detail', post_id = post.id)

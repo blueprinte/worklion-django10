@@ -9,7 +9,7 @@
     <!-- JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -27,18 +27,17 @@
                 </div>
             </div>
         </nav>
-        
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-              <h1 class="display-4">This is my list page!</h1>
-              <hr class="my-4">
-              {% for post in post %}
-                {% if post.post_active == True %}
-                <a href="{% url 'post:detail' post.id %}"><p class="lead">{{ post.title }}</p></a>
-                {% endif%}
-              {% endfor %}
-            </div>
+    
+        <div class="container">
+            <h1>View My Post</h1>
+            {% if post %}
+                <p>제목: {{ post.title }}</p>
+                <p>내용: {{ post.content }}</p>
+                <p>게시일: {{ post.created_at }}</p>
+            {% else %}
+                아직 포스트가 없습니다. 
+            {% endif %}
         </div>
-       </div>
+    </div>
 </body>
 </html>
