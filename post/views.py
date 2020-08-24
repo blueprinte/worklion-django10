@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Post
+from .models import Post, Comment
 from django.utils import timezone
+from django.contrib.auth.models import User
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -20,8 +23,10 @@ def lists(request):
 
 def detail(request, post_id):
     post = Post.objects.get(id=post_id)
+    comment = Comment.objects.filter(post=post_id)
     context = {
-        'post' : post
+        'post' : post,
+        'comment' : comment
     }
     return render(request, 'detail.html', context)
 
@@ -52,3 +57,12 @@ def delete(request, post_id):
     post = Post.objects.get(id=post_id)
     post.delete()
     return redirect('post:lists')
+
+@login_required
+def commentcreate(request, post_id):
+    user = request.user
+    post_id = post_id
+    content = request.POST['content']
+    comment = Comment(user=user, post_id=post_id, content=content, created_at=timezone.now())
+    comment.save()
+    return redirect('post:detail', post_id=post_id)
