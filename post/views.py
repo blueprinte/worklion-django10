@@ -77,6 +77,7 @@ def commentcreate(request, post_id):
     return redirect('post:detail', post_id=post_id)
 
 
+@login_required
 def like(request, post_id):
     if request.method == 'POST':
         try:
