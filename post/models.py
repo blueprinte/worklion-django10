@@ -10,6 +10,7 @@ class Post(models.Model):
     post_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     liked_users = models.ManyToManyField(User, related_name='liked_posts')
+    post_image = models.ImageField(upload_to='post', null=True)
 
     def __str__(self):
         return f'{self.title}'

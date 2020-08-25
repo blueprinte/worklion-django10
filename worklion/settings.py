@@ -124,3 +124,6 @@ STATIC_ROOT = "worklion/static"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+MEDIA_ROOT = "worklion/media"
+MEDIA_URL = '/media/'

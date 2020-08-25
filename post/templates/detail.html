@@ -4,7 +4,13 @@
     <h1>View My Post</h1>
         <p>제목: {{ post.title }}</p>
         <p>내용: {{ post.content }}</p>
+        {% if post.post_image %}
+            <div class="container">
+                <img src="{{ post.post_image.url }}" class="figure-img img-fluid rounded" width="50%" height="50%">
+            </div>
+        {% endif %}
         <p>게시일: {{ post.created_at }}</p>
+        <br><br>
     좋아요 수 : {{ post.liked_users.count }}
     {% if user == post.user %}
 <a href="{% url 'post:edit' post.id %}">글 수정하기</a>
