@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+    <h1>Dog API 활용하기 </h1>
+    <div class="container">
+    <form action="{% url 'doggy:doggy_api' %}" method="POST">
+        {% csrf_token %}
+        <select class="custom-select" name="dog_selection">
+            <option selected>찾고 싶은 강아지를 골라주세요.</option>
+            <option value="beagle">비글</option>
+            <option value="borzoi">보르조이</option>
+            <option value="collie">보더콜리</option>
+            <option value="doberman">도베르만</option>
+            <option value="husky">허스키</option>
+        </select>
+        <button type="submit" class="btn btn-primary btn-sm" style="float:right">Search</button>
+    </form>
+    </div>
+</div>
+{% endblock %}

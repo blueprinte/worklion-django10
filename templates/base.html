@@ -24,12 +24,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" href="{% url 'post:new' %}">new</span></a>
-                    <a class="nav-link active" href="{% url 'post:lists' %}">lists</span></a>
+                    <a class="nav-link active" href="{% url 'post:lists' %}">lists</a>
+                    <a class="nav-link active" href="{% url 'doggy:doggy_list' %}">doggy</a>
                     {% if user.is_authenticated %}
-                        <form action="{% url 'accounts:logout' %}" method="POST">
+                        <form action="{% url 'accounts:logout' %}" method="POST" class="form-inline">
                             {% csrf_token %}
                             {{ user.get_username }}
+                            <a class="nav-link active" href="{% url 'post:new' %}">new</span></a>
                             <button type="submit" class="btn btn-primary">로그아웃</button>
                         </form>
                     {% else %}
