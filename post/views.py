@@ -38,11 +38,10 @@ def detail(request, post_id):
 def create(request):
     title = request.POST['title']
     content = request.POST['content']
-    post_active = request.POST['post_active']
     post_image = None
     if 'post_image' in request.FILES:
         post_image = request.FILES['post_image']
-    post = Post(title=title, content=content, post_active=post_active, post_image=post_image, created_at=timezone.now())
+    post = Post(title=title, content=content, post_image=post_image, created_at=timezone.now())
     post.save()
     return redirect('post:detail', post_id=post.id)
 
