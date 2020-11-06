@@ -46,7 +46,7 @@
 <br>
 {% if user.is_authenticated %}
 <div class="container">
-    <form action="{% url 'post:commentcreate' post.id %}" method="POST">
+    <form action="{% url 'post:create_comment' post.id %}" method="POST">
     {% csrf_token %}
         <div class="form-group">
             <textarea class="form-control" rows="3" placeholder="내용을 적어주세요." name="content"></textarea>
@@ -60,10 +60,10 @@
 <br>
 <br>
 <div class="container">
-{% for comment in comment %}
+{% for comment in comments %}
     <div class="card">
         <div class="card-body">
-            <p>작성자: {{comment.user}}</p>
+            <p>작성자: {{comment.user.get_username}}</p>
             <p>{{comment.content}}</p>
             <p style="float:right;">{{comment.created_at}}</p>
         </div>
