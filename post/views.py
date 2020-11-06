@@ -70,7 +70,7 @@ def delete(request, post_id):
 
 
 @login_required
-def create_commnent(request, post_id):
+def create_comment(request, post_id):
     user = request.user
     post_id = post_id
     content = request.POST['content']
